@@ -1,0 +1,9 @@
+<section class="section-card">
+    <form class="section-card__form" [formGroup]="this.loginForm" (submit)="this.authentication()">
+        <input type="email" placeholder="joao@email.com" formControlName="username" required>
+        <input type="password" formControlName="password" required>
+        <button color="primary" [disabled]="this.loginForm.invalid">LOGIN</button>
+    </form>
+    <p><small>É só um exemplo,coloque um formato de email válido e qualquer coisa na senha ;)</small></p>
+
+</section>
