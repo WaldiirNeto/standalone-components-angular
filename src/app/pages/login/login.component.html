@@ -1,8 +1,8 @@
 <section class="section-card">
+    <img width="400px;" src="assets/imgs/logo_test.png">
     <form class="section-card__form" [formGroup]="this.form" (submit)="this.authentication()">
-        <input type="email" placeholder="joao@email.com" formControlName="username" required>
-        <input type="password" formControlName="password" required>
-        <button color="primary" [disabled]="this.form.invalid">LOGIN</button>
+        <input-form label="E-mail" type="email" controlName="username" textError="E-mail inválido"></input-form>
+        <input-form label="Senha" type="password" controlName="password" textError="Senha obrigatória"></input-form>
+        <button mat-raised-button color="primary" type="submit" [disabled]="this.form.invalid">ENTRAR</button>
     </form>
-    <p><small>É só um exemplo,coloque um formato de email válido e qualquer coisa na senha ;)</small></p>
 </section>

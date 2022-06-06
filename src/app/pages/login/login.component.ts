@@ -1,6 +1,5 @@
 import { Component, OnDestroy, Self, SkipSelf } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
 import { Subject, takeUntil } from 'rxjs';
@@ -8,12 +7,20 @@ import { LocalStorageService } from './services/local-storage.service';
 import { Router } from '@angular/router';
 import { FormHelper } from './build-form';
 import { AuthParamsModel, ResponseAuthParamsModel } from './models';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldComponent } from 'src/app/shared/components/input-form/mat-form-field.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [HttpClientModule, FormsModule, ReactiveFormsModule, MatInputModule],
+  imports: [
+    CommonModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldComponent,
+  ],
   providers: [LoginService, LocalStorageService],
   standalone: true,
 })
@@ -27,6 +34,7 @@ export class LoginComponent extends FormHelper implements OnDestroy {
   ) {
     super();
   }
+
   public authentication(): void {
     this.loginService
       .auth(this.form.value as AuthParamsModel)

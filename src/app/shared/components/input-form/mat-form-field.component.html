@@ -1,0 +1,8 @@
+<ng-container [formGroup]="this.form">
+    <mat-form-field appearance="outline">
+        <mat-label>{{this.label}}</mat-label>
+        <input [type]="this.type" matInput [formControlName]="this.controlName">
+        <ng-content></ng-content>
+        <mat-error *ngIf="this.form.controls[this.controlName].invalid">{{this.textError}}</mat-error>
+    </mat-form-field>
+</ng-container>

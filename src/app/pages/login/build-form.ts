@@ -1,21 +1,21 @@
-import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface FormLoginModel {
-  username: UntypedFormControl<string | null>;
-  password: UntypedFormControl<string | null>;
+  username: FormControl<string | null>;
+  password: FormControl<string | null>;
 }
 
 export class FormHelper {
-  protected form: UntypedFormGroup<FormLoginModel>;
+  protected form: FormGroup<FormLoginModel>;
 
   constructor() {
     this.formBuilder();
   }
 
   private formBuilder(): void {
-    this.form = new UntypedFormGroup<FormLoginModel>({
-      username: new UntypedFormControl('', [Validators.required]),
-      password: new UntypedFormControl('', [Validators.required]),
+    this.form = new FormGroup<FormLoginModel>({
+      username: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
     });
   }
 }
