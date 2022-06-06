@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   ControlContainer,
   FormGroup,
@@ -33,6 +27,5 @@ export class MatFormFieldComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.controlContainer.control as FormGroup;
-    console.log(this.form.value);
   }
 }
