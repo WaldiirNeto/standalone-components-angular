@@ -21,11 +21,11 @@ export class MatFormFieldComponent implements OnInit {
   @Input() controlName: string;
   @Input() textError: string;
 
-  form: FormGroup;
+  protected form: FormGroup;
 
-  constructor(private controlContainer: ControlContainer) {}
+  constructor(private _controlContainer: ControlContainer) {}
 
   ngOnInit() {
-    this.form = this.controlContainer.control as FormGroup;
+    this.form = this._controlContainer.control as FormGroup;
   }
 }
