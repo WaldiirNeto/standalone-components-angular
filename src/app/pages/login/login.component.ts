@@ -1,15 +1,17 @@
 import { Component, OnDestroy, Self, SkipSelf } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginService } from './services/login.service';
-import { Subject, takeUntil } from 'rxjs';
-import { LocalStorageService } from './services/local-storage.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
-import { FormHelper } from './build-form';
-import { AuthParamsModel, ResponseAuthParamsModel } from './models';
 import { CommonModule } from '@angular/common';
-import { MatFormFieldComponent } from 'src/app/shared/components/input-form/mat-form-field.component';
-
+import { Subject, takeUntil } from 'rxjs';
+import LoginService from './services/login.service';
+import { LocalStorageService } from './services/local-storage.service';
+import { FormHelper } from './helpers/build-form';
+import { AuthParamsModel, ResponseAuthParamsModel } from './models';
+import { MatFormFieldComponent } from '../../shared/components/input-form/mat-form-field.component';
+import { WnButtonComponent } from 'src/app/shared/components/wn-button/wn-button.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,28 +22,33 @@ import { MatFormFieldComponent } from 'src/app/shared/components/input-form/mat-
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldComponent,
+    MatProgressSpinnerModule,
+    WnButtonComponent,
   ],
   providers: [LoginService, LocalStorageService],
   standalone: true,
 })
 export class LoginComponent extends FormHelper implements OnDestroy {
   private destroy$ = new Subject();
+  protected loading: boolean;
 
   constructor(
-    @Self() private loginService: LoginService,
-    @Self() private LocalStorageService: LocalStorageService,
-    @SkipSelf() private Router: Router
+    @Self() private _loginService: LoginService,
+    @Self() private _localStorageService: LocalStorageService,
+    @SkipSelf() private _router: Router
   ) {
     super();
   }
 
   public authentication(): void {
-    this.loginService
+    this.loading = true;
+    this._loginService
       .auth(this.form.value as AuthParamsModel)
       .pipe(takeUntil(this.destroy$))
       .subscribe((tokenUser: ResponseAuthParamsModel) => {
-        this.LocalStorageService.setItem(tokenUser);
-        this.Router.navigate(['home']);
+        this.loading = false;
+        this._localStorageService.setItem(tokenUser);
+        this._router.navigate(['home']);
       });
   }
 

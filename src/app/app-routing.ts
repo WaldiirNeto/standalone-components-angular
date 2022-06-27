@@ -5,10 +5,11 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
-    title: 'Login | APP Eventos'
+    title: 'Login | APP Eventos',
   },
   {
     path: 'home',
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
+    title:'Home | APP Eventos'
   }
 ];
